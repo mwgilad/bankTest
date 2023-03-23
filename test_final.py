@@ -46,8 +46,4 @@ class TestBank:
         expected = '750'
         assert actual == expected
 
-print('hi')
-
-
-
 
