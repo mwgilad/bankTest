@@ -65,27 +65,35 @@ def log_in_neville(driver):
 
 # deposit into account after login as Neville
 def deposit_neville(driver, amount):
-    deposit_menu_btn = get_element(driver,'body > div > div > div.ng-scope > div > div:nth-child(5) > button:nth-child(2)')
-    deposit_menu_btn.click()
-    time.sleep(1)
-    amount_input = get_element(driver, 'body > div > div > div.ng-scope > div > div.container-fluid.mainBox.ng-scope > div > form > div > input')
-    amount_input.send_keys(amount)
-    time.sleep(1)
-    deposit_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div.container-fluid.mainBox.ng-scope > div > form > button')
-    deposit_btn.click()
-    time.sleep(1)
+    try:
+        deposit_menu_btn = get_element(driver,'body > div > div > div.ng-scope > div > div:nth-child(5) > button:nth-child(2)')
+        deposit_menu_btn.click()
+        time.sleep(1)
+        amount_input = get_element(driver, 'body > div > div > div.ng-scope > div > div.container-fluid.mainBox.ng-scope > div > form > div > input')
+        amount_input.send_keys(amount)
+        time.sleep(1)
+        deposit_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div.container-fluid.mainBox.ng-scope > div > form > button')
+        deposit_btn.click()
+        time.sleep(1)
+        return True
+    except:
+        return False
 
 # withdraw money from account after login and deposit in Neville's account
 def withdraw_neville(driver, amount):
-    withdraw_menu_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div:nth-child(5) > button:nth-child(3)')
-    withdraw_menu_btn.click()
-    time.sleep(1)
-    amount_input = get_element(driver, 'body > div > div > div.ng-scope > div > div.container-fluid.mainBox.ng-scope > div > form > div > input')
-    amount_input.send_keys(amount)
-    time.sleep(1)
-    withdraw_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div.container-fluid.mainBox.ng-scope > div > form > button')
-    withdraw_btn.click()
-    time.sleep(1)
+    try:
+        withdraw_menu_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div:nth-child(5) > button:nth-child(3)')
+        withdraw_menu_btn.click()
+        time.sleep(1)
+        amount_input = get_element(driver, 'body > div > div > div.ng-scope > div > div.container-fluid.mainBox.ng-scope > div > form > div > input')
+        amount_input.send_keys(amount)
+        time.sleep(1)
+        withdraw_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div.container-fluid.mainBox.ng-scope > div > form > button')
+        withdraw_btn.click()
+        time.sleep(1)
+        return True
+    except:
+        return False
 
 # return the balance of Neville's account as text after withdraw
 def balance_neville(driver):

@@ -45,9 +45,10 @@ class TestBank:
     def test_deposit_and_withdraw_neville(self,driver,url,deposit_amount,withdraw_amount):
         open_webpage(driver, url)
         log_in_neville(driver)
-        deposit_neville(driver, deposit_amount)
-        withdraw_neville(driver, withdraw_amount)
-        actual = balance_neville(driver)
+        if deposit_neville(driver, deposit_amount) == True and withdraw_neville(driver, withdraw_amount) == True:
+            actual = balance_neville(driver)
+        else:
+            actual = False
         expected = '750'
         assert actual == expected
 
