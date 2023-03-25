@@ -4,16 +4,17 @@ from selenium.webdriver.common.keys import Keys
 
 import time
 
-def get_element(driver, CSS_path):
-    return driver.find_element(By.CSS_SELECTOR, CSS_path)
-
-
-
+# open webpage
 def open_webpage(driver, url):
     driver.get(url)
     time.sleep(2)
     return driver.current_url
 
+# get element with CSS celector
+def get_element(driver, CSS_path):
+    return driver.find_element(By.CSS_SELECTOR, CSS_path)
+
+# add new customer to the system through manager user
 def add_new_customer(driver, fname, lname, zipcode):
     try:
         manager_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div.borderM.box.padT20 > div:nth-child(3) > button')
@@ -37,24 +38,24 @@ def add_new_customer(driver, fname, lname, zipcode):
     except:
         return False
 
-
-def find_customer(driver, fname):
+# search for existing customer by first and last name under customers after adding a new customer
+def find_customer(driver, fname, lname):
     customer_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div.center > button:nth-child(3)')
     customer_btn.click()
     time.sleep(1)
     source = driver.page_source
-    if fname in source:
+    if fname and lname in source:
         return True
     else:
         return False
 
-
+# log in as Neville Longbottom
 def log_in_neville(driver):
     cust_login_btn = get_element(driver,'body > div > div > div.ng-scope > div > div.borderM.box.padT20 > div:nth-child(1) > button')
     cust_login_btn.click()
     time.sleep(1)
     dropdown = get_element(driver,'#userSelect')
-    dropdown
+    dropdown.click()
     neville = get_element(driver, '#userSelect > option:nth-child(6)')
     neville.click()
     time.sleep(1)
@@ -62,6 +63,7 @@ def log_in_neville(driver):
     login_btn.click()
     time.sleep(1)
 
+# deposit into account after login as Neville
 def deposit_neville(driver, amount):
     deposit_menu_btn = get_element(driver,'body > div > div > div.ng-scope > div > div:nth-child(5) > button:nth-child(2)')
     deposit_menu_btn.click()
@@ -73,6 +75,7 @@ def deposit_neville(driver, amount):
     deposit_btn.click()
     time.sleep(1)
 
+# withdraw money from account after login and deposit in Neville's account
 def withdraw_neville(driver, amount):
     withdraw_menu_btn = get_element(driver, 'body > div > div > div.ng-scope > div > div:nth-child(5) > button:nth-child(3)')
     withdraw_menu_btn.click()
@@ -84,6 +87,7 @@ def withdraw_neville(driver, amount):
     withdraw_btn.click()
     time.sleep(1)
 
+# return the balance of Neville's account as text after withdraw
 def balance_neville(driver):
     balance = get_element(driver, 'body > div > div > div.ng-scope > div > div:nth-child(3) > strong:nth-child(2)')
     return balance.text
